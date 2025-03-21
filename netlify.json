@@ -1,0 +1,11 @@
+{
+  "build": {
+    "base": "/",
+    "publish": "public",
+    "functions": "netlify/functions",
+    "command": "# 无需构建命令"
+  },
+  "build.environment": {
+    "NODE_VERSION": "16"
+  }
+} 
