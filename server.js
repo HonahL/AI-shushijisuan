@@ -80,7 +80,7 @@ app.post('/api/analyze', async (req, res) => {
     res.setHeader('Connection', 'keep-alive');
     
     // 确保使用正确的 API 密钥
-    let DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || 'sk-3cf38d5043e0441f8442e443cf361878';
+    let DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || '';
     
     // 从环境变量获取系统提示词模板，如果不存在则使用默认值
     let systemPromptTemplate = process.env.SYSTEM_PROMPT_TEMPLATE || 
@@ -278,7 +278,7 @@ app.post('/api/save-system-prompt', (req, res) => {
         }
         
         // 简单的管理密码验证
-        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '0512';
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
         if (adminPassword !== ADMIN_PASSWORD) {
             console.log('密码验证失败');
             return res.status(401).json({ error: '管理密码不正确' });
@@ -389,7 +389,7 @@ app.post('/api/update-api-key', async (req, res) => {
         }).join(', '));
         
         // 验证管理员密码
-        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '0512';
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
         if (adminPassword !== ADMIN_PASSWORD) {
             console.log('密码验证失败');
             return res.status(401).json({ error: '密码不正确' });
@@ -473,7 +473,7 @@ app.post('/api/update-api-key-raw', (req, res) => {
             console.log('API 密钥长度:', apiKey.length);
             
             // 验证管理员密码
-            const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '0512';
+            const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
             if (adminPassword !== ADMIN_PASSWORD) {
                 return res.status(401).json({ error: '密码不正确' });
             }
@@ -514,7 +514,7 @@ app.post('/api/save-system-prompt', (req, res) => {
         const { systemPrompt, adminPassword } = req.body;
         
         // 简单的管理密码验证
-        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '0512';
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
         if (adminPassword !== ADMIN_PASSWORD) {
             return res.status(401).json({ error: '管理密码不正确' });
         }
@@ -567,7 +567,7 @@ app.post('/api/save-operation-prompts', (req, res) => {
         const { adminPassword, additionPrompt, subtractionPrompt, multiplicationPrompt } = req.body;
         
         // 简单的管理密码验证
-        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '0512';
+        const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
         if (adminPassword !== ADMIN_PASSWORD) {
             return res.status(401).json({ error: '管理密码不正确' });
         }
@@ -659,10 +659,10 @@ app.get('/api/get-operation-prompts', (req, res) => {
 
 // 添加一个测试端点来验证当前 API 密钥
 app.get('/api/test-api-key', (req, res) => {
-    let DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || 'sk-3cf38d5043e0441f8442e443cf361878';
+    let DEEPSEEK_API_KEY = process.env.DEEPSEEK_API_KEY || '';
     res.json({ 
         apiKeyPrefix: DEEPSEEK_API_KEY.substring(0, 5) + '...',
-        isDefault: DEEPSEEK_API_KEY === 'sk-3cf38d5043e0441f8442e443cf361878'
+        isDefault: DEEPSEEK_API_KEY === ''
     });
 });
 
