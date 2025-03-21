@@ -1,8 +1,18 @@
 [build]
   publish = "public"
   functions = "netlify/functions"
+  command = "# 无需构建命令"
+
+[build.environment]
+  NODE_VERSION = "16" # 使用较新但稳定的Node版本
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
+  status = 200
+
+# 添加一个默认重定向，确保单页应用路由正常工作
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200 
